@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29209.62
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackToSchool.CSharp", "BackToSchool.CSharp\BackToSchool.CSharp.csproj", "{7E66295A-F04E-41C6-AB1E-D31306D158EB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackToSchool.CSharp.Tests", "..\..\test\CSharp\BackToSchool.CSharp.Tests\BackToSchool.CSharp.Tests.csproj", "{74CF849C-7823-41E5-B2D0-4394EBF41943}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7E66295A-F04E-41C6-AB1E-D31306D158EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E66295A-F04E-41C6-AB1E-D31306D158EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E66295A-F04E-41C6-AB1E-D31306D158EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E66295A-F04E-41C6-AB1E-D31306D158EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74CF849C-7823-41E5-B2D0-4394EBF41943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74CF849C-7823-41E5-B2D0-4394EBF41943}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74CF849C-7823-41E5-B2D0-4394EBF41943}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74CF849C-7823-41E5-B2D0-4394EBF41943}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B12EF2A7-4D0E-48D6-B05E-0E3778B92B08}
+	EndGlobalSection
+EndGlobal
