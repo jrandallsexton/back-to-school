@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Algorithms\HackerRank\" />
-    <Folder Include="Algorithms\LeetCode\" />
+    <Folder Include="DataStructures\Graphs\" />
+    <Folder Include="DataStructures\Trees\" />
   </ItemGroup>
 
 </Project>
