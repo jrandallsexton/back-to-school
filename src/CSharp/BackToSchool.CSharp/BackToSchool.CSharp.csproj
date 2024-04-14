@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <Folder Include="DataStructures\Graphs\" />
-    <Folder Include="DataStructures\Trees\" />
   </ItemGroup>
 
 </Project>
