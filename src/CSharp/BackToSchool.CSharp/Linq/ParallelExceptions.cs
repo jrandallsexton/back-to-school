@@ -7,9 +7,9 @@ namespace BackToSchool.CSharp.Linq
     /// <summary>
     /// https://www.meziantou.net/getting-all-exceptions-thrown-from-parallel-foreachasync.htm
     /// </summary>
-    public class ParallelExceptions
+    public static class ParallelExceptions
     {
-        public async Task CatchFirstExceptionOnly()
+        public static async Task CatchFirstExceptionOnly()
         {
             try
             {
@@ -27,7 +27,7 @@ namespace BackToSchool.CSharp.Linq
             }
         }
 
-        public async Task AggregateExceptions()
+        public static async Task AggregateExceptions()
         {
             try
             {
