@@ -62,7 +62,6 @@ namespace BackToSchool.CSharp.DataStructures.LinkedLists
             {
                 data = d;
                 next = null;
-
             }
         }
     }

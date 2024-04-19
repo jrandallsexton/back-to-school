@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Folder Include="DataStructures\Graphs\" />
+    <Folder Include="Threading\" />
   </ItemGroup>
 
 </Project>
