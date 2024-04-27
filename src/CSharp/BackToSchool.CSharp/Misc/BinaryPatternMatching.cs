@@ -187,6 +187,49 @@ namespace BackToSchool.CSharp.Misc
             return matchCount;
         }
 
+        public static int MatchReviewAlt2(string pattern, string source)
+        {
+            var vowels = new List<char>() {
+                'a',
+                'e',
+                'i',
+                'o',
+                'u',
+                'y'
+            };
+
+            var patternLength = pattern.Length;
+            var sourceLength = source.Length;
+
+            if (sourceLength < patternLength)
+                return 0;
+
+            // convert the source into binary
+            var sb = new StringBuilder();
+
+            foreach (var t in source.ToCharArray())
+            {
+                var binaryValue = vowels.Contains(t) ? 0 : 1;
+                sb.Append(binaryValue);
+            }
+
+            var convertedString = sb.ToString();
+
+            var matchCount = 0;
+            var zMax = sourceLength - patternLength;
+
+            for (var z = 0; z <= zMax; z++)
+            {
+                var tmp = convertedString.AsSpan(z, patternLength);
+                if (tmp.Equals(pattern, StringComparison.Ordinal))
+                {
+                    matchCount++;
+                }
+            }
+
+            return matchCount;
+        }
+
         public static int MatchOptimized(string pattern, string source)
         {
             var binaryValues = new Dictionary<char, int>()

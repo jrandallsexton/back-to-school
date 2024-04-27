@@ -41,6 +41,15 @@ namespace BackToSchool.CSharp.Misc
         }
 
         [Benchmark]
+        public void ReviewedAlt2()
+        {
+            for (var i = 0; i < RepetitionCount; i++)
+            {
+                BinaryPatternMatching.MatchReviewAlt2(Pattern, Source);
+            }
+        }
+
+        [Benchmark]
         public void Optimized()
         {
             for (var i = 0; i < RepetitionCount; i++)
