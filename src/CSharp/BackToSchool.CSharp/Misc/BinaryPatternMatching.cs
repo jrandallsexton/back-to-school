@@ -189,7 +189,17 @@ namespace BackToSchool.CSharp.Misc
 
         public static int MatchReviewAlt2(string pattern, string source)
         {
-            var vowels = new List<char>() {
+            //var vowels = new List<char>() {
+            //    'a',
+            //    'e',
+            //    'i',
+            //    'o',
+            //    'u',
+            //    'y'
+            //};
+
+            var vowels = new HashSet<char>()
+            {
                 'a',
                 'e',
                 'i',
@@ -206,7 +216,6 @@ namespace BackToSchool.CSharp.Misc
 
             // convert the source into binary
             var sb = new StringBuilder();
-
             foreach (var t in source.ToCharArray())
             {
                 var binaryValue = vowels.Contains(t) ? 0 : 1;
