@@ -8,7 +8,7 @@ namespace BackToSchool.CSharp.Misc
     /// </summary>
     public class AsciiArt
     {
-        public void Draw(int nRows)
+        public string Draw(int nRows)
         {
             var sb = new StringBuilder();
             for (var i = 1; i <= nRows; i++)
@@ -16,6 +16,7 @@ namespace BackToSchool.CSharp.Misc
                 sb.AppendLine(new string(' ', nRows - i) + new string('*', (i * 2) - 1));
             }
             Console.WriteLine(sb.ToString());
+            return sb.ToString();
         }
     }
 }

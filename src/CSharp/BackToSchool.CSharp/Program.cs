@@ -1,4 +1,7 @@
 ﻿using System;
+using BackToSchool.CSharp.Misc;
+
+using BenchmarkDotNet.Running;
 
 namespace BackToSchool.CSharp
 {
@@ -6,7 +9,9 @@ namespace BackToSchool.CSharp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            BenchmarkRunner.Run<BinaryPatternMatchingBenchmarks>();
+            Console.WriteLine("Complete");
+            Console.ReadLine();
         }
     }
 }
