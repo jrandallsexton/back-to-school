@@ -6,7 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Aws\Lambdas\" />
     <Folder Include="DataStructures\Graphs\" />
+    <Folder Include="Azure\" />
+    <Folder Include="Tuples\" />
     <Folder Include="Threading\" />
   </ItemGroup>
 

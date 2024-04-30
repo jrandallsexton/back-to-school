@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BackToSchool.CSharp.Misc
 {
-    public class BinaryPatternMatching
+    public sealed class BinaryPatternMatching
     {
         private readonly IOutputHelper _outputHelper;
 
@@ -164,6 +164,54 @@ namespace BackToSchool.CSharp.Misc
             // convert the source into binary
             var sb = new StringBuilder();
 
+            foreach (var t in source.ToCharArray())
+            {
+                var binaryValue = vowels.Contains(t) ? 0 : 1;
+                sb.Append(binaryValue);
+            }
+            
+            var convertedString = sb.ToString();
+
+            var matchCount = 0;
+            var zMax = sourceLength - patternLength;
+
+            for (var z = 0; z <= zMax; z++)
+            {
+                var tmp = convertedString.AsSpan(z, patternLength);
+                if (tmp.Equals(pattern, StringComparison.Ordinal))
+                {
+                    matchCount++;
+                }
+            }
+
+            return matchCount;
+        }
+
+        public static int MatchReviewAlt2(string pattern, string source)
+        {
+            var vowels = new List<char>() {
+                'a',
+                'e',
+                'i',
+                'o',
+                'u',
+                'y'
+            };
+
+            var patternLength = pattern.Length;
+            var sourceLength = source.Length;
+
+            if (sourceLength < patternLength)
+                return 0;
+
+            // convert the source into binary
+            var sb = new StringBuilder();
+
+            // there MUST be a better way
+            // spans, conversion, comparison in a single swoop
+            // but even if i do that, i take the BigO from 2n to just n
+            // does it really matter?
+            var sourceSpan = source.AsSpan();
             foreach (var t in source.ToCharArray())
             {
                 var binaryValue = vowels.Contains(t) ? 0 : 1;
