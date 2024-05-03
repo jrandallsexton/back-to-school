@@ -6,11 +6,18 @@
 
   <ItemGroup>
     <Folder Include="Aws\Lambdas\" />
+    <Folder Include="Aws\Eventbridge\" />
+    <Folder Include="Aws\Kinesis\" />
+    <Folder Include="Aws\SecretsManager\" />
+    <Folder Include="Aws\StepFunctions\" />
+    <Folder Include="Aws\SnsSqs\" />
+    <Folder Include="Azure\DataLake\" />
+    <Folder Include="Azure\ServiceBus\" />
     <Folder Include="DataStructures\Graphs\" />
-    <Folder Include="DataStructures\Trees\" />
-    <Folder Include="Azure\" />
+    <Folder Include="Messaging\" />
+    <Folder Include="ExtensionMethods\" />
+    <Folder Include="Records\" />
     <Folder Include="Tuples\" />
-    <Folder Include="Threading\" />
   </ItemGroup>
 
   <ItemGroup>

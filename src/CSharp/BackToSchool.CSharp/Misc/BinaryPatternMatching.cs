@@ -31,7 +31,7 @@ namespace BackToSchool.CSharp.Misc
                 "y"
             };
 
-            // Still trying to decipher what constitues a "match"
+            // Still trying to decipher what constitutes a "match"
             // max number of matches?
 
             var matchCount = 0;
@@ -56,9 +56,9 @@ namespace BackToSchool.CSharp.Misc
                 sb.Append(zeroOneValue.ToString());
             }
             var convertedString = sb.ToString();
-            //Console.WriteLine($"Coverted string from: {source} to {convertedString}");
+            //Console.WriteLine($"Converted string from: {source} to {convertedString}");
 
-            // hmm? perhaps iterate through 'source' and create substrings of patternLenght?
+            // hmm? perhaps iterate through 'source' and create substrings of patternLength?
             // not sure how the BigO is going to look.  let's see
 
             var idx = 0;
@@ -83,7 +83,7 @@ namespace BackToSchool.CSharp.Misc
                         tempMatchCount++;
                 }
 
-                //Console.WriteLine($"\tMatchcount: {tempMatchCount}");
+                //Console.WriteLine($"\matchCount: {tempMatchCount}");
 
                 if (tempMatchCount == patternLength)
                     matchCount++;

@@ -7,14 +7,23 @@
 
   <ItemGroup>
     <Folder Include="Aws\Lambdas\" />
+    <Folder Include="Aws\Kinesis\" />
+    <Folder Include="Aws\Eventbridge\" />
+    <Folder Include="Aws\SecretsManager\" />
+    <Folder Include="Aws\StepFunctions\" />
+    <Folder Include="Aws\SnsSqs\" />
+    <Folder Include="Azure\DataLake\" />
+    <Folder Include="Azure\ServiceBus\" />
     <Folder Include="DataStructures\Graphs\" />
-    <Folder Include="Azure\" />
+    <Folder Include="ExtensionMethods\" />
+    <Folder Include="Records\" />
     <Folder Include="Tuples\" />
-    <Folder Include="Threading\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.13.12" />
+    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.39.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
 </Project>
