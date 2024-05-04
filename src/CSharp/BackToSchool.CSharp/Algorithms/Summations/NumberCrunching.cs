@@ -1,14 +1,9 @@
-﻿using BackToSchool.CSharp.Misc;
-
+﻿
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Order;
 
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BackToSchool.CSharp.Algorithms.Summations
 {
@@ -18,9 +13,20 @@ namespace BackToSchool.CSharp.Algorithms.Summations
     /// Takeaway?  For significantly large N, .sum() is faster
     /// as the framework applies some type of underlying logic
     /// That "n" seems to appear > 1K and especially > 10K
+    /// Methods arranged in order of performance (low to high) fpr N=10,000
     /// </summary>
     public class NumberCrunching
     {
+        public int ListSum(List<int> data)
+        {
+            return data.Sum();
+        }
+
+        public int ArraySum(int[] data)
+        {
+            return data.Sum();
+        }
+
         public int ArrayForSum(int[] data)
         {
             var sum = 0;
@@ -39,11 +45,6 @@ namespace BackToSchool.CSharp.Algorithms.Summations
                 sum += x;
             }
             return sum;
-        }
-
-        public int ArraySum(int[] data)
-        {
-            return data.Sum();
         }
 
         public int ListForSum(List<int> data)
@@ -65,11 +66,6 @@ namespace BackToSchool.CSharp.Algorithms.Summations
             }
             return sum;
         }
-
-        public int ListSum(List<int> data)
-        {
-            return data.Sum();
-        }
     }
 
     [MemoryDiagnoser]
@@ -81,7 +77,7 @@ namespace BackToSchool.CSharp.Algorithms.Summations
         private const int RepetitionCount = 100;
         private const int DataLength = 10000;
 
-        [Benchmark]
+        [Benchmark(Baseline = true)]
         public void ArraySumBenchmark()
         {
             var numbers = Enumerable.Range(0, DataLength).ToArray();
@@ -102,22 +98,22 @@ namespace BackToSchool.CSharp.Algorithms.Summations
         }
 
         [Benchmark]
-        public void ArrayForeachSumBenchmark()
-        {
-            var numbers = Enumerable.Range(0, DataLength).ToArray();
-            for (var i = 0; i < RepetitionCount; i++)
-            {
-                sut.ArrayForeachSum(numbers);
-            }
-        }
-
-        [Benchmark(Baseline = true)]
         public void ArrayForSumBenchmark()
         {
             var numbers = Enumerable.Range(0, DataLength).ToArray();
             for (var i = 0; i < RepetitionCount; i++)
             {
                 sut.ArrayForSum(numbers);
+            }
+        }
+
+        [Benchmark]
+        public void ArrayForeachSumBenchmark()
+        {
+            var numbers = Enumerable.Range(0, DataLength).ToArray();
+            for (var i = 0; i < RepetitionCount; i++)
+            {
+                sut.ArrayForeachSum(numbers);
             }
         }
 
