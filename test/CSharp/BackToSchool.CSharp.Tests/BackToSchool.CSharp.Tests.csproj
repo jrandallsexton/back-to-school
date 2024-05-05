@@ -12,7 +12,6 @@
     <Folder Include="Aws\StepFunctions\" />
     <Folder Include="Aws\SnsSqs\" />
     <Folder Include="Azure\DataLake\" />
-    <Folder Include="Azure\ServiceBus\" />
     <Folder Include="DataStructures\Graphs\" />
     <Folder Include="Messaging\" />
     <Folder Include="ExtensionMethods\" />

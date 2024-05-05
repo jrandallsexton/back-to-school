@@ -83,15 +83,4 @@ namespace BackToSchool.CSharp.Azure.CosmosDb
             return result.StatusCode;
         }
     }
-
-    // C# record type for items in the container
-    public record CosmosNoSqlTestItem(
-        string id,
-        string providerId,
-        string externalId,
-        string category,
-        string name,
-        int capacity,
-        bool isGrass
-    );
 }

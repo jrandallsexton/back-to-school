@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
+using BackToSchool.CSharp.Shared;
 
 namespace BackToSchool.CSharp.Tests.Azure.CosmosDb
 {
@@ -58,7 +59,7 @@ namespace BackToSchool.CSharp.Tests.Azure.CosmosDb
             // arrange
             var sut = new CosmosNoSql();
 
-            var item = new CosmosNoSqlTestItem(
+            var item = new TestPoco(
                 id: "EEEE2232-915C-4DE2-0186-08DC6B411EB7",
                 providerId: "espn",
                 externalId: "1400",
@@ -80,7 +81,7 @@ namespace BackToSchool.CSharp.Tests.Azure.CosmosDb
             // arrange
             var sut = new CosmosNoSql();
 
-            var items = new List<CosmosNoSqlTestItem>()
+            var items = new List<TestPoco>()
             {
                 new(
                     id: "EEEE2232-915C-4DE2-0186-08DC6B411EB7",
