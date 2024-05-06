@@ -15,7 +15,8 @@ namespace BackToSchool.CSharp
             //BenchmarkRunner.Run<BinaryPatternMatchingBenchmarks>();
             //BenchmarkRunner.Run<LazyEnumerableBenchmarks>();
             //BenchmarkRunner.Run<YieldingBenchmarks>();
-            BenchmarkRunner.Run<NumberCrunchingBenchmarks>();
+            //BenchmarkRunner.Run<NumberCrunchingBenchmarks>();
+            BenchmarkRunner.Run<SwitchExpressionsBenchmarks>();
             Console.WriteLine("Complete");
             Console.ReadLine();
         }
