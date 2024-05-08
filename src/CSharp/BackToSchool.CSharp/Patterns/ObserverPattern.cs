@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BackToSchool.CSharp.Misc
+namespace BackToSchool.CSharp.Patterns
 {
-    public class MiscPlaceholder
+    internal class ObserverPattern
     {
-
-
     }
 }

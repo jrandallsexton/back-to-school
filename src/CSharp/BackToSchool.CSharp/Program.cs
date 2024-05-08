@@ -16,7 +16,8 @@ namespace BackToSchool.CSharp
             //BenchmarkRunner.Run<LazyEnumerableBenchmarks>();
             //BenchmarkRunner.Run<YieldingBenchmarks>();
             //BenchmarkRunner.Run<NumberCrunchingBenchmarks>();
-            BenchmarkRunner.Run<SwitchExpressionsBenchmarks>();
+            //BenchmarkRunner.Run<SwitchExpressionsBenchmarks>();
+            BenchmarkRunner.Run<SpottingMetricsBenchmarks>();
             Console.WriteLine("Complete");
             Console.ReadLine();
         }
