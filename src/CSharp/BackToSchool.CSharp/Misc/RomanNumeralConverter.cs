@@ -5,6 +5,7 @@ using BenchmarkDotNet.Order;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DotNext.Collections.Generic;
 
 namespace BackToSchool.CSharp.Misc
 {
@@ -89,9 +90,67 @@ namespace BackToSchool.CSharp.Misc
             { 'M', 1000},
         };
 
+        public int ToRoman_NaiveBruteForce(string roman)
+        {
+            // just do a string replacement
+            foreach (var romanChar in roman)
+            {
+                if (!_romanValues.ContainsKey(romanChar))
+                    return 0;
+            }
+
+            var values = new List<int>();
+
+            foreach (var foo in _gotchyas)
+            {
+                while (roman.Contains(foo.Key))
+                {
+                    values.Add(_gotchyas[foo.Key]);
+                    roman = roman.Replace(foo.Key, string.Empty);
+                }
+            }
+
+            foreach (var letter in roman)
+            {
+                values.Add(_romanValues[letter]);
+            }
+
+            return values.Sum();
+        }
+
+        public int ToRoman_NaiveBruteForce_Alt(string roman)
+        {
+            // just do a string replacement
+            var romanSpan = roman.AsSpan();
+
+            foreach (var romanChar in romanSpan)
+            {
+                if (!_romanValues.ContainsKey(romanChar))
+                    return 0;
+            }
+
+            var values = new List<int>();
+
+            foreach (var foo in _gotchyas)
+            {
+                while (roman.Contains(foo.Key))
+                {
+                    values.Add(_gotchyas[foo.Key]);
+                    roman = roman.Replace(foo.Key, string.Empty);
+                }
+            }
+
+            foreach (var letter in roman)
+            {
+                values.Add(_romanValues[letter]);
+            }
+
+            return values.Sum();
+        }
+
         public int ToRoman(string roman)
         {
-            var allChars = roman.ToArray().AsSpan();
+            var allChars = roman.ToArray();
 
             var left = 0;
             var right = 1;
@@ -130,7 +189,7 @@ namespace BackToSchool.CSharp.Misc
 
         public int ToRomanAsSpan(string roman)
         {
-            var allChars = roman.ToArray();//.AsSpan();
+            var allChars = roman.ToArray().AsSpan();
 
             var left = 0;
             var right = 1;
@@ -191,6 +250,24 @@ namespace BackToSchool.CSharp.Misc
             for (var i = 0; i < RepetitionCount; i++)
             {
                 _sut.ToRomanAsSpan("MCMXCIV");
+            }
+        }
+
+        [Benchmark]
+        public void ToRomanNaiveBruteForce()
+        {
+            for (var i = 0; i < RepetitionCount; i++)
+            {
+                _sut.ToRoman_NaiveBruteForce("MCMXCIV");
+            }
+        }
+
+        [Benchmark]
+        public void ToRomanNaiveBruteForceAlt()
+        {
+            for (var i = 0; i < RepetitionCount; i++)
+            {
+                _sut.ToRoman_NaiveBruteForce_Alt("MCMXCIV");
             }
         }
     }
