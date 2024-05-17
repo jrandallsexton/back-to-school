@@ -17,7 +17,8 @@ namespace BackToSchool.CSharp
             //BenchmarkRunner.Run<YieldingBenchmarks>();
             //BenchmarkRunner.Run<NumberCrunchingBenchmarks>();
             //BenchmarkRunner.Run<SwitchExpressionsBenchmarks>();
-            BenchmarkRunner.Run<SpottingMetricsBenchmarks>();
+            //BenchmarkRunner.Run<SpottingMetricsBenchmarks>();
+            BenchmarkRunner.Run<RomanNumeralConverterBenchmarks>();
             Console.WriteLine("Complete");
             Console.ReadLine();
         }

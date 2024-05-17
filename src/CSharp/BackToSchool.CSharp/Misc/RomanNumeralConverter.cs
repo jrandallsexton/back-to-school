@@ -1,8 +1,10 @@
-﻿using System;
+﻿
+using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Order;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BackToSchool.CSharp.Misc
 {
@@ -45,39 +47,50 @@ namespace BackToSchool.CSharp.Misc
     /// </summary>
     public class RomanNumeralConverter
     {
+        private readonly char[] _validChars =
+        [
+            'I',
+            'V',
+            'X',
+            'L',
+            'C',
+            'D',
+            'M'
+        ];
+
+        /// <summary>
+        /// need to capture the "gotchyas" (i.e. 4 == IV != IIII, etc)
+        /// from above:
+        /// IV => 4
+        /// IX => 9
+        /// XL => 40
+        /// XC => 90
+        /// CD => 400
+        /// CM => 900
+        /// </summary>
+        private readonly Dictionary<string, int> _gotchyas = new Dictionary<string, int>()
+        {
+            { "IV", 4 },
+            { "IX", 9 },
+            { "XL", 40 },
+            { "XC", 90 },
+            { "CD", 400 },
+            { "CM", 900 },
+        };
+
+        private readonly Dictionary<char, int> _romanValues = new Dictionary<char, int>()
+        {
+            { 'I', 1},
+            { 'V', 5},
+            { 'X', 10},
+            { 'L', 50},
+            { 'C', 100},
+            { 'D', 500},
+            { 'M', 1000},
+        };
+
         public int ToRoman(string roman)
         {
-            var romanValues = new Dictionary<char, int>()
-            {
-                { 'I', 1},
-                { 'V', 5},
-                { 'X', 10},
-                { 'L', 50},
-                { 'C', 100},
-                { 'D', 500},
-                { 'M', 1000},
-            };
-
-            // need to capture the "gotchyas" (i.e. 4 == IV != IIII, etc)
-            // from above:
-            // IV => 4
-            // IX => 9
-            // XL => 40
-            // XC => 90
-            // CD => 400
-            // CM => 900
-            var gotchyas = new Dictionary<string, int>()
-            {
-                { "IV", 4 },
-                { "IX", 9 },
-                { "XL", 40 },
-                { "XC", 90 },
-                { "CD", 400 },
-                { "CM", 900 },
-            };
-
-            // Test1:  LVIII => 53
-            // Test2:  XLIII => 43
             var allChars = roman.ToArray().AsSpan();
 
             var left = 0;
@@ -89,31 +102,96 @@ namespace BackToSchool.CSharp.Misc
             {
                 // look at the left
                 var leftChar = allChars[left];
-                var rightChar = (maxLeft - 1 == left) ? left : allChars[right];
+
+                if (!_validChars.Contains(leftChar))
+                    return 0;
+
+                var rightChar = (maxLeft - 1 == left) ? leftChar : allChars[right];
 
                 // are we in a subtraction scenario?
                 var pair = left == right ? string.Empty : $"{leftChar}{rightChar}";
 
-                if (gotchyas.TryGetValue(pair, out var gotchya))
+                if (_gotchyas.TryGetValue(pair, out var gotchya))
                 {
                     sum += gotchya;
-                    left = right++;
-                    right = left++;
+                    left = right + 1;
+                    right = left + 1;
                 }
                 else
                 {
-                    sum += romanValues[leftChar];
+                    sum += _romanValues[leftChar];
                     left++;
                     right++;
                 }
-
-                // keep count?  match gotchyas?
-                // look at the right and see if condition is coming?
-
-                // as i progress, I am performing a summation
             }
 
             return sum;
+        }
+
+        public int ToRomanAsSpan(string roman)
+        {
+            var allChars = roman.ToArray();//.AsSpan();
+
+            var left = 0;
+            var right = 1;
+            var sum = 0;
+            var maxLeft = allChars.Length;
+
+            while (left < maxLeft)
+            {
+                // look at the left
+                var leftChar = allChars[left];
+
+                if (!_validChars.Contains(leftChar))
+                    return 0;
+
+                var rightChar = (maxLeft - 1 == left) ? leftChar : allChars[right];
+
+                // are we in a subtraction scenario?
+                var pair = left == right ? string.Empty : $"{leftChar}{rightChar}";
+
+                if (_gotchyas.TryGetValue(pair, out var gotchya))
+                {
+                    sum += gotchya;
+                    left = right + 1;
+                    right = left + 1;
+                }
+                else
+                {
+                    sum += _romanValues[leftChar];
+                    left++;
+                    right++;
+                }
+            }
+
+            return sum;
+        }
+    }
+
+    [MemoryDiagnoser]
+    [Orderer(SummaryOrderPolicy.FastestToSlowest)]
+    [RankColumn]
+    public class RomanNumeralConverterBenchmarks()
+    {
+        private static readonly RomanNumeralConverter _sut = new();
+        private const int RepetitionCount = 100_000;
+
+        [Benchmark(Baseline = true)]
+        public void ToRoman()
+        {
+            for (var i = 0; i < RepetitionCount; i++)
+            {
+                _sut.ToRoman("MCMXCIV");
+            }
+        }
+
+        [Benchmark]
+        public void ToRomanAsSpan()
+        {
+            for (var i = 0; i < RepetitionCount; i++)
+            {
+                _sut.ToRomanAsSpan("MCMXCIV");
+            }
         }
     }
 }
