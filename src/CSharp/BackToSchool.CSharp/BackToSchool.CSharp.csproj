@@ -9,6 +9,7 @@
     <Folder Include="Aws\Lambdas\" />
     <Folder Include="Aws\Kinesis\" />
     <Folder Include="Aws\Eventbridge\" />
+    <Folder Include="Aws\DynamoDb\" />
     <Folder Include="Aws\SecretsManager\" />
     <Folder Include="Aws\StepFunctions\" />
     <Folder Include="Aws\SnsSqs\" />

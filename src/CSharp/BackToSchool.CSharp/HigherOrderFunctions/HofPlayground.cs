@@ -6,7 +6,9 @@ namespace BackToSchool.CSharp.HigherOrderFunctions
 {
     public class HofPlayground
     {
-        public List<TOutput> Transform<TInput, TOutput>(List<TInput> list, Func<TInput, TOutput> transformer)
+        public List<TOutput> Transform<TInput, TOutput>(
+            List<TInput> list,
+            Func<TInput, TOutput> transformer)
         {
             var newList = new List<TOutput>();
 
