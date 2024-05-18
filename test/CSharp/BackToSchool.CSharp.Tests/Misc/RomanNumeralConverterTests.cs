@@ -18,12 +18,13 @@ namespace BackToSchool.CSharp.Tests.Misc
         [InlineData("LVIII", 58)]
         [InlineData("MCMXCIV", 1994)]
         [InlineData("AAABBB", 0)]
-        public void ToRoman_TestCases(string roman, int expectedInt)
+        [InlineData("MMMCMXCIX", 3999)]
+        public void FromRoman(string roman, int expectedInt)
         {
             // arrange
 
             // act
-            var result = RomanNumeralConverter.ToRoman(roman);
+            var result = RomanNumeralConverter.FromRoman(roman);
 
             // assert
             result.Should().Be(expectedInt);
@@ -37,12 +38,13 @@ namespace BackToSchool.CSharp.Tests.Misc
         [InlineData("LVIII", 58)]
         [InlineData("MCMXCIV", 1994)]
         [InlineData("AAABBB", 0)]
-        public void ToRoman_NaiveBruteForce(string roman, int expectedInt)
+        [InlineData("MMMCMXCIX", 3999)]
+        public void FromRoman_NaiveBruteForce(string roman, int expectedInt)
         {
             // arrange
 
             // act
-            var result = RomanNumeralConverter.ToRoman_NaiveBruteForce(roman);
+            var result = RomanNumeralConverter.FromRoman_NaiveBruteForce(roman);
 
             // assert
             result.Should().Be(expectedInt);
@@ -55,12 +57,13 @@ namespace BackToSchool.CSharp.Tests.Misc
         [InlineData("LVIII", 58)]
         [InlineData("MCMXCIV", 1994)]
         [InlineData("AAABBB", 0)]
-        public void ToRomanLinear(string roman, int expectedInt)
+        [InlineData("MMMCMXCIX", 3999)]
+        public void FromRomanLinear(string roman, int expectedInt)
         {
             // arrange
 
             // act
-            var result = RomanNumeralConverter.ToRomanLinear(roman);
+            var result = RomanNumeralConverter.FromRomanLinear(roman);
 
             // assert
             result.Should().Be(expectedInt);
@@ -73,12 +76,13 @@ namespace BackToSchool.CSharp.Tests.Misc
         [InlineData("LVIII", 58)]
         [InlineData("MCMXCIV", 1994)]
         [InlineData("AAABBB", 0)]
-        public void ToRomanLinearAllSpans(string roman, int expectedInt)
+        [InlineData("MMMCMXCIX", 3999)]
+        public void FromRomanLinearAllSpansSubtraction(string roman, int expectedInt)
         {
             // arrange
 
             // act
-            var result = RomanNumeralConverter.ToRomanLinearAllSpansSubtraction(roman);
+            var result = RomanNumeralConverter.FromRomanLinearAllSpansSubtraction(roman);
 
             // assert
             result.Should().Be(expectedInt);
@@ -91,12 +95,13 @@ namespace BackToSchool.CSharp.Tests.Misc
         [InlineData("LVIII", 58)]
         [InlineData("MCMXCIV", 1994)]
         [InlineData("AAABBB", 0)]
-        public void ToRomanLastShot(string roman, int expectedInt)
+        [InlineData("MMMCMXCIX", 3999)]
+        public void FromRomanLastShot(string roman, int expectedInt)
         {
             // arrange
 
             // act
-            var result = RomanNumeralConverter.ToRomanLastShot(roman);
+            var result = RomanNumeralConverter.FromRomanLastShot(roman);
 
             // assert
             result.Should().Be(expectedInt);

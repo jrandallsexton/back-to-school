@@ -51,15 +51,14 @@ namespace BackToSchool.CSharp.Misc
     /// </summary>
     public static class RomanNumeralConverter
     {
-        private static readonly char[] _validChars =
+        private static readonly char[] _romanChars =
         [
-            'I',
-            'V',
-            'X',
-            'L',
-            'C',
-            'D',
-            'M'
+            'I', 'V', 'X', 'L', 'C', 'D', 'M'
+        ];
+
+        private static readonly int[] _romanVals =
+        [
+            1,5,10,50,100,500,1000
         ];
 
         /// <summary>
@@ -124,7 +123,7 @@ namespace BackToSchool.CSharp.Misc
             'C'
         ];
 
-        public static int ToRoman_NaiveBruteForce(string roman)
+        public static int FromRoman_NaiveBruteForce(string roman)
         {
             // just do a string replacement
             foreach (var romanChar in roman)
@@ -152,7 +151,7 @@ namespace BackToSchool.CSharp.Misc
             return values.Sum();
         }
 
-        public static Option<int> ToRoman_NaiveBruteForce_LExt(string roman)
+        public static Option<int> FromRoman_NaiveBruteForce_LExt(string roman)
         {
             
             // just do a string replacement
@@ -181,7 +180,7 @@ namespace BackToSchool.CSharp.Misc
             return values.Sum();
         }
 
-        public static int ToRoman_NaiveBruteForce_Alt(string roman)
+        public static int FromRoman_NaiveBruteForce_Alt(string roman)
         {
             // just do a string replacement
             var romanSpan = roman.AsSpan();
@@ -211,7 +210,7 @@ namespace BackToSchool.CSharp.Misc
             return values.Sum();
         }
 
-        public static int ToRomanExtensionLinear(this string roman)
+        public static int FromRomanExtensionLinear(this string roman)
         {
             var romanSpan = roman.AsSpan();
             var values = new List<int>();
@@ -223,7 +222,7 @@ namespace BackToSchool.CSharp.Misc
             {
                 current = romanSpan[i];
 
-                if (!_validChars.Contains(current))
+                if (!_romanChars.Contains(current))
                     return 0;
 
                 if (prev == null)
@@ -251,7 +250,7 @@ namespace BackToSchool.CSharp.Misc
             return values.Sum();
         }
 
-        public static int ToRomanLinear(string roman)
+        public static int FromRomanLinear(string roman)
         {
             var romanSpan = roman.AsSpan();
             var values = new List<int>();
@@ -263,7 +262,7 @@ namespace BackToSchool.CSharp.Misc
             {
                 current = romanSpan[i];
 
-                if (!_validChars.Contains(current))
+                if (!_romanChars.Contains(current))
                     return 0;
 
                 if (prev == null)
@@ -291,10 +290,10 @@ namespace BackToSchool.CSharp.Misc
             return values.Sum();
         }
 
-        public static int ToRomanLinearAlt(string roman)
+        public static int FromRomanLinearAlt(string roman)
         {
             var romanSpan = roman.AsSpan();
-            var validCharsSpan = _validChars.AsSpan();
+            var validCharsSpan = _romanChars.AsSpan();
             
             var values = new List<int>();
             
@@ -333,10 +332,10 @@ namespace BackToSchool.CSharp.Misc
             return values.Sum();
         }
 
-        public static int ToRomanLinearAllSpansSubtraction(string roman)
+        public static int FromRomanLinearAllSpansSubtraction(string roman)
         {
             var romanSpan = roman.AsSpan();
-            var validCharsSpan = _validChars.AsSpan();
+            var validCharsSpan = _romanChars.AsSpan();
             var triggerCharsSpan = _triggerChars.AsSpan();
             var triggerValuesSpan = _triggerVals.AsSpan();
 
@@ -388,10 +387,13 @@ namespace BackToSchool.CSharp.Misc
             return sum;
         }
 
-        public static int ToRomanLastShot(string roman)
+        public static int FromRomanLastShot(string roman)
         {
             var romanSpan = roman.AsSpan();
-            var validCharsSpan = _validChars.AsSpan();
+
+            var romanCharsSpan = _romanChars.AsSpan();
+            var romanValuesSpan = _romanVals.AsSpan();
+
             var triggerCharsSpan = _triggerChars.AsSpan();
             var triggerValuesSpan = _triggerVals.AsSpan();
 
@@ -405,12 +407,17 @@ namespace BackToSchool.CSharp.Misc
             {
                 var current = romanSpan[i];
 
-                if (!validCharsSpan.Contains(current))
+                var romanCharIndex = romanCharsSpan.IndexOf(current);
+                if (romanCharIndex < 0)
+                {
                     return 0;
+                }
+
+                var romanValue = romanValuesSpan[romanCharIndex];
 
                 if (i == 0)
                 {
-                    sum += _romanValues[current];
+                    sum += romanValue;
                     prev = current;
                     prevValue = sum;
                     continue;
@@ -428,15 +435,14 @@ namespace BackToSchool.CSharp.Misc
                     if (triggerValue == prev)
                     {
                         // perform subtraction to update the sum
-                        var currentValue = _romanValues[current];
-                        sum += (currentValue - prevValue) - prevValue;
+                        sum += (romanValue - prevValue) - prevValue;
                         prev = current;
-                        prevValue = currentValue;
+                        prevValue = romanValue;
                         continue;
                     }
                 }
 
-                prevValue = _romanValues[current];
+                prevValue = romanValue;
                 sum += prevValue;
                 prev = current;
 
@@ -445,7 +451,7 @@ namespace BackToSchool.CSharp.Misc
             return sum;
         }
 
-        public static int ToRoman(string roman)
+        public static int FromRoman(string roman)
         {
             var allChars = roman.ToArray();
 
@@ -459,7 +465,7 @@ namespace BackToSchool.CSharp.Misc
                 // look at the left
                 var leftChar = allChars[left];
 
-                if (!_validChars.Contains(leftChar))
+                if (!_romanChars.Contains(leftChar))
                     return 0;
 
                 var rightChar = (maxLeft - 1 == left) ? leftChar : allChars[right];
@@ -484,7 +490,7 @@ namespace BackToSchool.CSharp.Misc
             return sum;
         }
 
-        public static int ToRomanAsSpan(string roman)
+        public static int FromRomanAsSpan(string roman)
         {
             var allChars = roman.ToArray().AsSpan();
 
@@ -498,7 +504,7 @@ namespace BackToSchool.CSharp.Misc
                 // look at the left
                 var leftChar = allChars[left];
 
-                if (!_validChars.Contains(leftChar))
+                if (!_romanChars.Contains(leftChar))
                     return 0;
 
                 var rightChar = (maxLeft - 1 == left) ? leftChar : allChars[right];
@@ -530,68 +536,69 @@ namespace BackToSchool.CSharp.Misc
     public class RomanNumeralConverterBenchmarks()
     {
         //private static readonly RomanNumeralConverter _sut = new();
-        private const int RepetitionCount = 100_000;
+        private const int RepetitionCount = 10_000_000;
+        private const string RomanNumeral = "MMMCMXCIX";
 
         [Benchmark(Baseline = true)]
-        public void ToRoman()
+        public void FromRoman()
         {
             for (var i = 0; i < RepetitionCount; i++)
             {
-                RomanNumeralConverter.ToRoman("MCMXCIV");
+                RomanNumeralConverter.FromRoman(RomanNumeral);
             }
         }
 
         [Benchmark]
-        public void ToRomanAsSpan()
+        public void FromRomanAsSpan()
         {
             for (var i = 0; i < RepetitionCount; i++)
             {
-                RomanNumeralConverter.ToRomanAsSpan("MCMXCIV");
+                RomanNumeralConverter.FromRomanAsSpan(RomanNumeral);
             }
         }
 
         [Benchmark]
-        public void ToRomanLinear()
+        public void FromRomanLinear()
         {
             for (var i = 0; i < RepetitionCount; i++)
             {
-                RomanNumeralConverter.ToRomanLinear("MCMXCIV");
+                RomanNumeralConverter.FromRomanLinear(RomanNumeral);
             }
         }
 
         [Benchmark]
-        public void ToRomanExtensionLinear()
+        public void FromRomanExtensionLinear()
         {
             for (var i = 0; i < RepetitionCount; i++)
             {
-                "MCMXCIV".ToRomanExtensionLinear();
+                RomanNumeral.FromRomanExtensionLinear();
             }
         }
 
         [Benchmark]
-        public void ToRomanLinearAlt()
+        public void FromRomanLinearAlt()
         {
             for (var i = 0; i < RepetitionCount; i++)
             {
-                RomanNumeralConverter.ToRomanLinearAlt("MCMXCIV");
+                RomanNumeralConverter.FromRomanLinearAlt(RomanNumeral);
             }
         }
 
         [Benchmark]
-        public void ToRomanLinearAllSpansSubtraction()
+        public void FromRomanLinearAllSpansSubtraction()
         {
             for (var i = 0; i < RepetitionCount; i++)
             {
-                RomanNumeralConverter.ToRomanLinearAllSpansSubtraction("MCMXCIV");
+                RomanNumeralConverter.FromRomanLinearAllSpansSubtraction(RomanNumeral);
             }
         }
 
         [Benchmark]
-        public void ToRomanLastShot()
+        public void FromRomanLastShot()
         {
             for (var i = 0; i < RepetitionCount; i++)
             {
-                RomanNumeralConverter.ToRomanLastShot("MCMXCIV");
+                RomanNumeralConverter.FromRomanLastShot(RomanNumeral);
             }
         }
 
@@ -600,7 +607,7 @@ namespace BackToSchool.CSharp.Misc
         {
             for (var i = 0; i < RepetitionCount; i++)
             {
-                RomanNumeralConverter.ToRoman_NaiveBruteForce("MCMXCIV");
+                RomanNumeralConverter.FromRoman_NaiveBruteForce(RomanNumeral);
             }
         }
 
@@ -609,7 +616,7 @@ namespace BackToSchool.CSharp.Misc
         {
             for (var i = 0; i < RepetitionCount; i++)
             {
-                RomanNumeralConverter.ToRoman_NaiveBruteForce_Alt("MCMXCIV");
+                RomanNumeralConverter.FromRoman_NaiveBruteForce_Alt(RomanNumeral);
             }
         }
     }
