@@ -106,5 +106,24 @@ namespace BackToSchool.CSharp.Tests.Misc
             // assert
             result.Should().Be(expectedInt);
         }
+
+        [Theory]
+        [InlineData("III", 3)]
+        [InlineData("IV", 4)]
+        [InlineData("", 0)]
+        [InlineData("LVIII", 58)]
+        [InlineData("MCMXCIV", 1994)]
+        [InlineData("AAABBB", 0)]
+        [InlineData("MMMCMXCIX", 3999)]
+        public void SimplerConverter(string roman, int expectedInt)
+        {
+            // arrange
+
+            // act
+            var result = RomanNumeralConverter.SimplerConverter(roman);
+
+            // assert
+            result.Should().Be(expectedInt);
+        }
     }
 }

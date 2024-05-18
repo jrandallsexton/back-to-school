@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BenchmarkDotNet.Validators;
 using DotNext.Collections.Generic;
+using Humanizer;
 using LanguageExt;
 
 namespace BackToSchool.CSharp.Misc
@@ -122,6 +123,131 @@ namespace BackToSchool.CSharp.Misc
             'C',
             'C'
         ];
+
+        /// <summary>
+        /// https://stackoverflow.com/questions/14900228/roman-numerals-to-integers
+        /// </summary>
+        private static Dictionary<char, int> RomanMap = new Dictionary<char, int>()
+        {
+            {'I', 1},
+            {'V', 5},
+            {'X', 10},
+            {'L', 50},
+            {'C', 100},
+            {'D', 500},
+            {'M', 1000}
+        };
+
+        /// <summary>
+        /// https://stackoverflow.com/questions/14900228/roman-numerals-to-integers
+        /// </summary>
+        /// <param name="roman"></param>
+        /// <returns></returns>
+        public static int RomanToInteger(string roman)
+        {
+            int number = 0;
+            for (int i = 0; i < roman.Length; i++)
+            {
+                if (i + 1 < roman.Length && RomanMap[roman[i]] < RomanMap[roman[i + 1]])
+                {
+                    number -= RomanMap[roman[i]];
+                }
+                else
+                {
+                    number += RomanMap[roman[i]];
+                }
+            }
+            return number;
+        }
+
+        /// <summary>
+        /// https://stackoverflow.com/a/45064346/403890
+        /// </summary>
+        /// <param name="letter"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        private static int ConvertLetterToNumber(char letter)
+        {
+            switch (letter)
+            {
+                case 'M':
+                {
+                    return 1000;
+                }
+
+                case 'D':
+                {
+                    return 500;
+                }
+
+                case 'C':
+                {
+                    return 100;
+                }
+
+                case 'L':
+                {
+                    return 50;
+                }
+
+                case 'X':
+                {
+                    return 10;
+                }
+
+                case 'V':
+                {
+                    return 5;
+                }
+
+                case 'I':
+                {
+                    return 1;
+                }
+
+                default:
+                {
+                    //throw new ArgumentException("Ivalid charakter");
+                    return 0;
+                }
+            }
+        }
+
+        /// <summary>
+        /// https://stackoverflow.com/a/45064346/403890
+        /// Yeah, it is faster
+        /// Why?  It performs ZERO validation on the input and just throws an exception
+        /// I modified ConvertLetterToNumber as a result
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        public static int SimplerConverter(string number)
+        {
+            number = number.ToUpper();
+            var result = 0;
+
+            foreach (var letter in number)
+            {
+                result += ConvertLetterToNumber(letter);
+            }
+
+            if (number.Contains("IV") || number.Contains("IX"))
+                result -= 2;
+
+            if (number.Contains("XL") || number.Contains("XC"))
+                result -= 20;
+
+            if (number.Contains("CD") || number.Contains("CM"))
+                result -= 200;
+
+            return result;
+
+        }
+
+        public static int FromRomanHumanizer(string roman)
+        {
+            return roman.FromRoman();
+        }
 
         public static int FromRoman_NaiveBruteForce(string roman)
         {
@@ -558,6 +684,33 @@ namespace BackToSchool.CSharp.Misc
         }
 
         [Benchmark]
+        public void SO_RomanToInteger()
+        {
+            for (var i = 0; i < RepetitionCount; i++)
+            {
+                RomanNumeralConverter.RomanToInteger(RomanNumeral);
+            }
+        }
+
+        [Benchmark]
+        public void SO_SimplerConverter()
+        {
+            for (var i = 0; i < RepetitionCount; i++)
+            {
+                RomanNumeralConverter.SimplerConverter(RomanNumeral);
+            }
+        }
+
+        [Benchmark]
+        public void SO_Humanizer()
+        {
+            for (var i = 0; i < RepetitionCount; i++)
+            {
+                RomanNumeralConverter.FromRomanHumanizer(RomanNumeral);
+            }
+        }
+
+        [Benchmark]
         public void FromRomanLinear()
         {
             for (var i = 0; i < RepetitionCount; i++)
@@ -603,7 +756,7 @@ namespace BackToSchool.CSharp.Misc
         }
 
         [Benchmark]
-        public void ToRomanNaiveBruteForce()
+        public void FromRoman_NaiveBruteForce()
         {
             for (var i = 0; i < RepetitionCount; i++)
             {
@@ -612,7 +765,7 @@ namespace BackToSchool.CSharp.Misc
         }
 
         [Benchmark]
-        public void ToRomanNaiveBruteForceAlt()
+        public void FromRoman_NaiveBruteForce_Alt()
         {
             for (var i = 0; i < RepetitionCount; i++)
             {
