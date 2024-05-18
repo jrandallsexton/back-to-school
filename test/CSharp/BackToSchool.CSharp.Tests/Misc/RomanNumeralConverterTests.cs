@@ -65,5 +65,41 @@ namespace BackToSchool.CSharp.Tests.Misc
             // assert
             result.Should().Be(expectedInt);
         }
+
+        [Theory]
+        [InlineData("III", 3)]
+        [InlineData("IV", 4)]
+        [InlineData("", 0)]
+        [InlineData("LVIII", 58)]
+        [InlineData("MCMXCIV", 1994)]
+        [InlineData("AAABBB", 0)]
+        public void ToRomanLinearAllSpans(string roman, int expectedInt)
+        {
+            // arrange
+
+            // act
+            var result = RomanNumeralConverter.ToRomanLinearAllSpansSubtraction(roman);
+
+            // assert
+            result.Should().Be(expectedInt);
+        }
+
+        [Theory]
+        [InlineData("III", 3)]
+        [InlineData("IV", 4)]
+        [InlineData("", 0)]
+        [InlineData("LVIII", 58)]
+        [InlineData("MCMXCIV", 1994)]
+        [InlineData("AAABBB", 0)]
+        public void ToRomanLastShot(string roman, int expectedInt)
+        {
+            // arrange
+
+            // act
+            var result = RomanNumeralConverter.ToRomanLastShot(roman);
+
+            // assert
+            result.Should().Be(expectedInt);
+        }
     }
 }

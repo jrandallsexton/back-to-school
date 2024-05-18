@@ -103,6 +103,27 @@ namespace BackToSchool.CSharp.Misc
             { 'M', 'C' }
         };
 
+        // using these two instead of a Dictionary
+        private static readonly char[] _triggerChars =
+        [
+            'V',
+            'X',
+            'L',
+            'C',
+            'D',
+            'M'
+        ];
+
+        private static readonly char[] _triggerVals =
+        [
+            'I',
+            'I',
+            'X',
+            'X',
+            'C',
+            'C'
+        ];
+
         public static int ToRoman_NaiveBruteForce(string roman)
         {
             // just do a string replacement
@@ -274,7 +295,7 @@ namespace BackToSchool.CSharp.Misc
         {
             var romanSpan = roman.AsSpan();
             var validCharsSpan = _validChars.AsSpan();
-
+            
             var values = new List<int>();
             
             char? prev = null;
@@ -310,6 +331,118 @@ namespace BackToSchool.CSharp.Misc
             }
 
             return values.Sum();
+        }
+
+        public static int ToRomanLinearAllSpansSubtraction(string roman)
+        {
+            var romanSpan = roman.AsSpan();
+            var validCharsSpan = _validChars.AsSpan();
+            var triggerCharsSpan = _triggerChars.AsSpan();
+            var triggerValuesSpan = _triggerVals.AsSpan();
+
+            var sum = 0;
+
+            char? prev = null;
+            var prevValue = 0;
+
+            var max = romanSpan.Length;
+            for (var i = 0; i < max; i++)
+            {
+                var current = romanSpan[i];
+
+                if (!validCharsSpan.Contains(current))
+                    return 0;
+
+                if (i == 0)
+                {
+                    sum += _romanValues[current];
+                    prev = current;
+                    prevValue = sum;
+                    continue;
+                }
+
+                // Does this character have a trigger?
+                var triggerCharIndex = triggerCharsSpan.IndexOf(current);
+
+                if (triggerCharIndex > -1)
+                {
+                    // yes, it does
+                    // get the value for the trigger
+                    var triggerValue = triggerValuesSpan[triggerCharIndex];
+
+                    if (triggerValue == prev)
+                    {
+                        // perform subtraction to update the sum
+                        sum += (_romanValues[current] - prevValue) - prevValue;
+                        prevValue = _romanValues[current];
+                        continue;
+                    }
+                }
+
+                prevValue = _romanValues[current];
+                sum += prevValue;
+                prev = current;
+
+            }
+
+            return sum;
+        }
+
+        public static int ToRomanLastShot(string roman)
+        {
+            var romanSpan = roman.AsSpan();
+            var validCharsSpan = _validChars.AsSpan();
+            var triggerCharsSpan = _triggerChars.AsSpan();
+            var triggerValuesSpan = _triggerVals.AsSpan();
+
+            var sum = 0;
+
+            char? prev = null;
+            var prevValue = 0;
+
+            var max = romanSpan.Length;
+            for (var i = 0; i < max; i++)
+            {
+                var current = romanSpan[i];
+
+                if (!validCharsSpan.Contains(current))
+                    return 0;
+
+                if (i == 0)
+                {
+                    sum += _romanValues[current];
+                    prev = current;
+                    prevValue = sum;
+                    continue;
+                }
+
+                // Does this character have a trigger?
+                var triggerCharIndex = triggerCharsSpan.IndexOf(current);
+
+                if (triggerCharIndex > -1)
+                {
+                    // yes, it does
+                    // get the value for the trigger
+                    var triggerValue = triggerValuesSpan[triggerCharIndex];
+
+                    if (triggerValue == prev)
+                    {
+                        // perform subtraction to update the sum
+                        var currentValue = _romanValues[current];
+                        sum += (currentValue - prevValue) - prevValue;
+                        prev = current;
+                        prevValue = currentValue;
+                        continue;
+                    }
+                }
+
+                prevValue = _romanValues[current];
+                sum += prevValue;
+                prev = current;
+
+            }
+
+            return sum;
         }
 
         public static int ToRoman(string roman)
@@ -441,6 +574,24 @@ namespace BackToSchool.CSharp.Misc
             for (var i = 0; i < RepetitionCount; i++)
             {
                 RomanNumeralConverter.ToRomanLinearAlt("MCMXCIV");
+            }
+        }
+
+        [Benchmark]
+        public void ToRomanLinearAllSpansSubtraction()
+        {
+            for (var i = 0; i < RepetitionCount; i++)
+            {
+                RomanNumeralConverter.ToRomanLinearAllSpansSubtraction("MCMXCIV");
+            }
+        }
+
+        [Benchmark]
+        public void ToRomanLastShot()
+        {
+            for (var i = 0; i < RepetitionCount; i++)
+            {
+                RomanNumeralConverter.ToRomanLastShot("MCMXCIV");
             }
         }
 
