@@ -120,62 +120,62 @@ namespace BackToSchool.CSharp.Misc
             return results;
         }
 
-        /// <summary>
-        /// So recursion is nice and all, but given the following constraint: 0 <= digits.length <= 4 ...
-        /// We could simply make this thing iterative and likely more performant
-        /// </summary>
-        /// <param name="digits"></param>
-        /// <returns></returns>
-        public IList<string> LetterCombinationsBruteForce(string digits)
-        {
-            // remove all whitespace chars
-            var digitSpan = digits.ToArray();
+        ///// <summary>
+        ///// So recursion is nice and all, but given the following constraint: 0 <= digits.length <= 4 ...
+        ///// We could simply make this thing iterative and likely more performant
+        ///// </summary>
+        ///// <param name="digits"></param>
+        ///// <returns></returns>
+        //public IList<string> LetterCombinationsBruteForce(string digits)
+        //{
+        //    // remove all whitespace chars
+        //    var digitSpan = digits.ToArray();
 
-            var values = new List<string>();
+        //    var values = new List<string>();
 
-            var letterArrays = new Dictionary<char, char[]>();
+        //    var letterArrays = new Dictionary<char, char[]>();
 
-            // get array of letters for each character
-            foreach (var digit in digitSpan)
-            {
-                if (!char.IsNumber(digit) || char.IsWhiteSpace(digit) || !char.IsBetween(digit, '2', '9'))
-                    return new List<string>();
+        //    // get array of letters for each character
+        //    foreach (var digit in digitSpan)
+        //    {
+        //        if (!char.IsNumber(digit) || char.IsWhiteSpace(digit) || !char.IsBetween(digit, '2', '9'))
+        //            return new List<string>();
 
-                if (!letterArrays.ContainsKey(digit))
-                    letterArrays.Add(digit, _numberValues[digit]);
-            }
+        //        if (!letterArrays.ContainsKey(digit))
+        //            letterArrays.Add(digit, _numberValues[digit]);
+        //    }
 
-            if (letterArrays.Count == 0)
-                return values;
+        //    if (letterArrays.Count == 0)
+        //        return values;
 
-            var keys = letterArrays.Keys.ToArray();
+        //    var keys = letterArrays.Keys.ToArray();
 
-            if (letterArrays.Count > 1)
-            {
-                for (var i = 0; i < letterArrays.Count - 1; i++)
-                {
-                    var left = letterArrays[keys[i]];
-                    var right = letterArrays[keys[i + 1]];
+        //    if (letterArrays.Count > 1)
+        //    {
+        //        for (var i = 0; i < letterArrays.Count - 1; i++)
+        //        {
+        //            var left = letterArrays[keys[i]];
+        //            var right = letterArrays[keys[i + 1]];
 
-                    foreach (var leftChar in left)
-                    {
-                        foreach (var rightChar in right)
-                        {
-                            values.Add($"{leftChar}{rightChar}");
-                        }
-                    }
-                }
-            }
-            else
-            {
-                values.AddRange(letterArrays[keys[0]]);
-            }
+        //            foreach (var leftChar in left)
+        //            {
+        //                foreach (var rightChar in right)
+        //                {
+        //                    values.Add($"{leftChar}{rightChar}");
+        //                }
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        values.AddRange(letterArrays[keys[0]]);
+        //    }
 
-            // process the arrays to create combinations
+        //    // process the arrays to create combinations
 
 
-            return values;
-        }
+        //    return values;
+        //}
 
         private void Backtrack(int index, List<char> current, string digits, List<string> results, Dictionary<char, string> phoneMap)
         {

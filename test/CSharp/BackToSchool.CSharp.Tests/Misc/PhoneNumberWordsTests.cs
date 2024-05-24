@@ -18,6 +18,9 @@ namespace BackToSchool.CSharp.Tests.Misc
         [InlineData("", 0)]
         [InlineData(" ", 0)]
         [InlineData("       ", 0)]
+        [InlineData("23", 9)]
+        [InlineData("2", 3)]
+        [InlineData("22", 9)]
         public void LetterCombinations_EmptyStrings(string digits, int expectedCount)
         {
             // arrange
