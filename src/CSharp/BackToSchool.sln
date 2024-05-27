@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackToSchool.CSharp", "Back
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackToSchool.CSharp.Tests", "..\..\test\CSharp\BackToSchool.CSharp.Tests\BackToSchool.CSharp.Tests.csproj", "{74CF849C-7823-41E5-B2D0-4394EBF41943}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{87A0A16C-05E3-4364-B316-CABE3B737798}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackToSchool.CSharp.Api", "BackToSchool.CSharp.Api\BackToSchool.CSharp.Api.csproj", "{8D6849D7-2773-4E5B-8634-116D209CA314}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,10 @@ Global
 		{74CF849C-7823-41E5-B2D0-4394EBF41943}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74CF849C-7823-41E5-B2D0-4394EBF41943}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74CF849C-7823-41E5-B2D0-4394EBF41943}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D6849D7-2773-4E5B-8634-116D209CA314}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D6849D7-2773-4E5B-8634-116D209CA314}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D6849D7-2773-4E5B-8634-116D209CA314}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D6849D7-2773-4E5B-8634-116D209CA314}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
