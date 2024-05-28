@@ -9,7 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackToSchool.CSharp.Tests",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{87A0A16C-05E3-4364-B316-CABE3B737798}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackToSchool.CSharp.Api", "BackToSchool.CSharp.Api\BackToSchool.CSharp.Api.csproj", "{8D6849D7-2773-4E5B-8634-116D209CA314}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackToSchool.CSharp.Api", "BackToSchool.CSharp.Api\BackToSchool.CSharp.Api.csproj", "{8D6849D7-2773-4E5B-8634-116D209CA314}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackToSchool.CSharp.ApiMin", "BackToSchool.CSharp.ApiMin\BackToSchool.CSharp.ApiMin.csproj", "{E77DA3D4-8551-4811-A380-042AC9AA1DCD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C8AD93F0-1A49-4EE6-AE1F-ACADF3B387BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{B1AD365E-1EAF-4AB2-AFF2-2FB3712D0084}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,9 +35,19 @@ Global
 		{8D6849D7-2773-4E5B-8634-116D209CA314}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D6849D7-2773-4E5B-8634-116D209CA314}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D6849D7-2773-4E5B-8634-116D209CA314}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E77DA3D4-8551-4811-A380-042AC9AA1DCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E77DA3D4-8551-4811-A380-042AC9AA1DCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E77DA3D4-8551-4811-A380-042AC9AA1DCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E77DA3D4-8551-4811-A380-042AC9AA1DCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7E66295A-F04E-41C6-AB1E-D31306D158EB} = {C8AD93F0-1A49-4EE6-AE1F-ACADF3B387BA}
+		{74CF849C-7823-41E5-B2D0-4394EBF41943} = {B1AD365E-1EAF-4AB2-AFF2-2FB3712D0084}
+		{8D6849D7-2773-4E5B-8634-116D209CA314} = {C8AD93F0-1A49-4EE6-AE1F-ACADF3B387BA}
+		{E77DA3D4-8551-4811-A380-042AC9AA1DCD} = {C8AD93F0-1A49-4EE6-AE1F-ACADF3B387BA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B12EF2A7-4D0E-48D6-B05E-0E3778B92B08}

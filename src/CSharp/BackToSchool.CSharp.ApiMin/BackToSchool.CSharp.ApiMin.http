@@ -1,0 +1,6 @@
+@BackToSchool.CSharp.ApiMin_HostAddress = http://localhost:5102
+
+GET {{BackToSchool.CSharp.ApiMin_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
