@@ -10,11 +10,18 @@ namespace BackToSchool.CSharp.Sorting
     {
         public void Sort(int[] numbers)
         {
-            if (numbers.Length == 0 || numbers.Length == 1)
+            if (numbers.Length is 0 or 1)
                 return;
 
             var left = numbers[0];
             var right = numbers[1];
+            var swapCount = numbers.Length;
+
+            while (swapCount > 0)
+            {
+                swapCount = 0;
+
+            }
         }
     }
 }

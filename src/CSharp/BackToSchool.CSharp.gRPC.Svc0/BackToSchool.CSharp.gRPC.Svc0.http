@@ -1,0 +1,6 @@
+@BackToSchool.CSharp.gRPC.Svc0_HostAddress = http://localhost:5062
+
+GET {{BackToSchool.CSharp.gRPC.Svc0_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
