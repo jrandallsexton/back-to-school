@@ -31,11 +31,13 @@ namespace BackToSchool.CSharp.Tests.Misc.Leet
     {
         public IEnumerator<object[]> GetEnumerator()
         {
-            yield return new object[] { new int[] { 3, 2, 2, 3 }, 3, 2 };
-            yield return new object[] { new int[] { 0, 1, 2, 2, 3, 0, 4, 2 }, 2, 5 };
-            yield return new object[] { new int[] {}, 2, 0 };
-            yield return new object[] { new int[] {1}, 1, 0 };
-            yield return new object[] { new int[] { 1,1 }, 1, 0 };
+            yield return [new[] { 3, 2, 2, 3 }, 3, 2];
+            yield return [new[] { 0, 1, 2, 2, 3, 0, 4, 2 }, 2, 5];
+            yield return [new int[] {}, 2, 0];
+            yield return [new[] { 1 }, 1, 0];
+            yield return [new[] { 2 }, 3, 1];
+            yield return [new[] { 3, 3 }, 5, 2];
+            yield return [new[] { 1, 1 }, 1, 0];
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

@@ -8,29 +8,44 @@ namespace BackToSchool.CSharp.Misc.Leet
     {
         public int RemoveElement(int[] nums, int val)
         {
-            if (nums.Length == 0) return 0;
-            if (nums.Length == 1 && nums[0] == val)
+            switch (nums.Length)
             {
-                return 0;
+                case 0:
+                    return 0;
+                case 1:
+                    return nums[0] == val ? 0 : 1;
             }
 
             var nonMatchCount = 0;
 
             var left = 0;
             var right = nums.Length - 1;
-            var max = nums.Length - 2;
 
-            while (left <= max && left < right)
+            while (left <= right)
             {
                 var leftValue = nums[left];
-                var rightValue = nums[right];
 
                 if (leftValue == val)
                 {
-                    // swap left and right
-                    nums[left] = rightValue;
-                    nums[right] = leftValue;
-                    right--;
+                    // can we move it one place to the right?
+                    var tmpRight = left + 1;
+                    while (tmpRight < nums.Length)
+                    {
+                        var tmpRightVal = nums[tmpRight];
+                        if (tmpRightVal == val)
+                        {
+                            tmpRight++;
+                        }
+                        else
+                        {
+                            // swap
+                            nums[left] = tmpRightVal;
+                            nums[tmpRight] = leftValue;
+                            nonMatchCount++;
+                            break;
+                        }
+                    }
+                    left++;
                 }
                 else
                 {
