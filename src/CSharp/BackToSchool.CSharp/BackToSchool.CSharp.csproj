@@ -28,6 +28,7 @@
     <PackageReference Include="LanguageExt.Core" Version="4.4.8" />
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.39.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
 </Project>
