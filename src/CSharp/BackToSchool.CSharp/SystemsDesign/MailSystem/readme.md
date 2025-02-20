@@ -70,7 +70,7 @@ subgraph Engines
 end
 Q1 --> ESVC0 & ESVC1 & ESVCN
 Q2@{ shape: bow-rect, label: "Error Queue" }
-ESVC0 & ESVC1 & ESVCN --> DBNOSQL
+DBNOSQL --> ESVC0 & ESVC1 & ESVCN
 Q3@{ shape: bow-rect, label: "Outbound Queue" }
 ESVC0 & ESVC1 & ESVCN --> Q3
 subgraph Processors
@@ -80,12 +80,12 @@ subgraph Processors
 end
 Q3 --> PSVC0 & PSVC1 & PSVCN
 PSVC0 & PSVC1 & PSVCN --> Q2
-BlobStorage --> PSVC0 & PSVC1 & PSVCN
+ExternalBlobStorage --> PSVC0 & PSVC1 & PSVCN
 Clients --> LoadBalancer
 subgraph ExternalBlobStorage
     GENDOCS@{ shape: docs, label: "Generated documents" }
 end
-ESVC0 & ESVC1 & ESVC2 & ESVCN --> ExternalBlobStorage
+ESVC0 & ESVC1 & ESVCN --> ExternalBlobStorage
 subgraph ExternalSmtp
 SMTP[SMTP Provider]
 end
