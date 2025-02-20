@@ -3,6 +3,8 @@
 
 ## Approach
 System runs in a Kubernetes cluster behind a cloud-based load balancer.
+
+Items external to the cluster are all databases, message bus (i.e. SNS/SQS, Az Svc Bus), and blob storage (S3, etc);
 ***
 ## Components
 
