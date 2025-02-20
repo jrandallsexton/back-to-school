@@ -58,10 +58,13 @@ Data usage of blob storage would be minimized due to utilization of compression 
 Processors monitor the Outbound Queue and are responsible for transmitting the generated content via one or more external providers (eg. SMTP, SNS/MMS)
 ***
 ### Considerations
-How many documents are being generated daily?  What is the average size?  How does that translate into cloud storage costs?
-How will we process retries from the error queue?
-Need to generate an integration event once a document has been transmitted to external provider(s)
-need to aggregate campaign information with number successful, returned, unsubcribed, etc
+- How many documents are being generated daily?
+- What is the average size?
+- How does that translate into cloud storage costs?
+- How will we process retries from the error queue?
+- Need to generate an integration event once a document has been transmitted to external provider(s)
+- Need to aggregate campaign information with number successful, returned, unsubcribed, etc
+- Are we a startup?  If so, perhaps we should start with fewer microservices?  Modular monolith then detect where the bottlenecks are and break them out?
 ***
 ```mermaid
 flowchart LR
