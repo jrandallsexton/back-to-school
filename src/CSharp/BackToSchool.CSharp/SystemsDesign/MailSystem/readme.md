@@ -9,6 +9,38 @@ Items external to the cluster are all databases, message bus (i.e. SNS/SQS, Az S
 ## Components
 
 ### API
+Assumptions:
+- Template for which this incoming request exists
+- Authentication and authorization (likely JWT) beyond scope
+
+Example usages:
+
+Create future:
+POST to: /api/campaigns
+
+Example body:
+```
+{
+  "CampaignId": <string/Guid>,
+  "TemplateId": <string/Guid>,
+  "FrequencyType": <int>,
+  "SendAtUtc": <string/dateTime>,
+  ...
+}
+```
+On-Demand:
+
+POST to: /api/templates
+
+Example body:
+```
+{
+  "TemplateId": <string/Guid>,
+  ...
+}
+```
+
+Other endpoints, such as a link to unsubscribe from a mailing campaign are also beyond the scope of this first design, but must be handled.
 ***
 ### Schedulers
 Schedulers take incoming API requests from the queue and determine whether they need to be processed immediately, on a delay, or as a cron job.
@@ -19,12 +51,18 @@ Engines are responsible for generating outbound content. Templates are pulled fr
 Upon generation, the completed content is uploaded to external blob storage.  Retention policy for generated content is likely beyond the scope of this initial design, but can envision a configurable policy of a reasonable value (eg. 30 days) for any issues and posterity.  Archiving any examples of content would be subject of a future discussion.
 
 After content is uploaded to blob storage, an event is raised and sent to the Outbound Queue.
+
+Data usage of blob storage would be minimized due to utilization of compression and CDNs for static content.
 ***
 ### Processors
 Processors monitor the Outbound Queue and are responsible for transmitting the generated content via one or more external providers (eg. SMTP, SNS/MMS)
 ***
 ### Considerations
-
+How many documents are being generated daily?  What is the average size?  How does that translate into cloud storage costs?
+How will we process retries from the error queue?
+Need to generate an integration event once a document has been transmitted to external provider(s)
+need to aggregate campaign information with number successful, returned, unsubcribed, etc
+***
 ```mermaid
 flowchart LR
 subgraph Clients
